@@ -1,0 +1,5 @@
+name: LaunchPlugin
+version: '${version}'
+main: eu.suro.launch.LauchMain
+authors: [ Suro ]
+description: This is plugin grpc client for send status about server LaunchCore
