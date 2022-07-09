@@ -12,9 +12,10 @@ public final class LauchMain extends JavaPlugin {
 
     static Server server;
     static JavaPlugin plugin;
+    static ManagedChannel channel;
     @Override
     public void onEnable() {
-        ManagedChannel channel = ManagedChannelBuilder
+        channel = ManagedChannelBuilder
                 .forAddress("localhost",9000)
                 .usePlaintext()
                 .build();
@@ -36,5 +37,6 @@ public final class LauchMain extends JavaPlugin {
     @Override
     public void onDisable() {
        this.server.UpdateServer(Server.Status.STOPPING);
+       channel.shutdown();
     }
 }
