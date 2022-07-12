@@ -1,5 +1,6 @@
 package eu.suro.launch;
 
+import com.google.common.cache.LoadingCache;
 import eu.suro.launch.grpc.Server;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -13,6 +14,8 @@ public final class LauchMain extends JavaPlugin {
     static Server server;
     static JavaPlugin plugin;
     static ManagedChannel channel;
+
+
     @Override
     public void onEnable() {
         channel = ManagedChannelBuilder
@@ -24,7 +27,6 @@ public final class LauchMain extends JavaPlugin {
         this.server = server;
         this.plugin = this;
         new BukkitRunnable() {
-
             @Override
             public void run() {
                 if(plugin.isEnabled()){
