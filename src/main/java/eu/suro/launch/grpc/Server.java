@@ -23,6 +23,32 @@ public class Server {
         stub.updateServer(updateServerRequest, new UpdateCallback());
     }
 
+    public void DeleteServer(){
+        ServerOuterClass.DeleteServerRequest deleteServerRequest = ServerOuterClass
+                        .DeleteServerRequest
+                        .newBuilder()
+                        .setPort(Bukkit.getPort())
+                        .buildPartial();
+        stub.deleteServer(deleteServerRequest, new DeleteCallback());
+    }
+    class DeleteCallback implements StreamObserver<ServerOuterClass.Response>{
+        @Override
+        public void onNext(ServerOuterClass.Response value) {
+            Bukkit.getLogger().info("Server deleted");
+        }
+
+        @Override
+        public void onError(Throwable t) {
+            Bukkit.getLogger().info(t.getMessage());
+            Bukkit.getLogger().info("Server not deleted");
+        }
+
+        @Override
+        public void onCompleted() {
+
+        }
+    }
+
     class UpdateCallback implements StreamObserver<ServerOuterClass.Response>{
 
         @Override

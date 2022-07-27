@@ -2,8 +2,8 @@ package eu.suro.launch;
 
 import com.google.common.cache.LoadingCache;
 import eu.suro.launch.grpc.Server;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
+import io.grpc.*;
+import jdk.jfr.internal.tool.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -15,12 +15,12 @@ public final class LauchMain extends JavaPlugin {
     static JavaPlugin plugin;
     static ManagedChannel channel;
 
-
     @Override
     public void onEnable() {
-        channel = ManagedChannelBuilder
-                .forAddress("localhost",9000)
-                .usePlaintext()
+        saveDefaultConfig();
+        ChannelCredentials credentials = InsecureChannelCredentials.create();
+        channel = Grpc.newChannelBuilder(getConfig().getString("grpc.host")+":"+getConfig().getString("grpc.host"),
+                        credentials)
                 .build();
         ServerGrpc.ServerStub stub = ServerGrpc.newStub(channel);
         Server server = new Server(stub);
@@ -34,11 +34,25 @@ public final class LauchMain extends JavaPlugin {
                 }
             }
         }.runTaskTimerAsynchronously(this, 10L, 20*30);
+        DeleteServer();
+        getServer().getPluginManager().registerEvents(new Events(), this);
+    }
+
+    public static void DeleteServer(){
+        new BukkitRunnable(){
+            @Override
+            public void run() {
+                if(Bukkit.getOnlinePlayers().size() == 0){
+                    Bukkit.shutdown();
+                }
+            }
+        }.runTaskLaterAsynchronously(plugin, 20*30);
     }
 
     @Override
     public void onDisable() {
-       this.server.UpdateServer(Server.Status.STOPPING);
+       server.DeleteServer();
+//       this.server.UpdateServer(Server.Status.STOPPING);
        channel.shutdown();
     }
 }

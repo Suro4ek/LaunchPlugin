@@ -139,6 +139,68 @@ public final class ServerGrpc {
     return getListServersMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<server.ServerOuterClass.Empty,
+      server.ServerOuterClass.Plugins> getGetPluginsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetPlugins",
+      requestType = server.ServerOuterClass.Empty.class,
+      responseType = server.ServerOuterClass.Plugins.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<server.ServerOuterClass.Empty,
+      server.ServerOuterClass.Plugins> getGetPluginsMethod() {
+    io.grpc.MethodDescriptor<server.ServerOuterClass.Empty, server.ServerOuterClass.Plugins> getGetPluginsMethod;
+    if ((getGetPluginsMethod = ServerGrpc.getGetPluginsMethod) == null) {
+      synchronized (ServerGrpc.class) {
+        if ((getGetPluginsMethod = ServerGrpc.getGetPluginsMethod) == null) {
+          ServerGrpc.getGetPluginsMethod = getGetPluginsMethod =
+              io.grpc.MethodDescriptor.<server.ServerOuterClass.Empty, server.ServerOuterClass.Plugins>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetPlugins"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  server.ServerOuterClass.Empty.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  server.ServerOuterClass.Plugins.getDefaultInstance()))
+              .setSchemaDescriptor(new ServerMethodDescriptorSupplier("GetPlugins"))
+              .build();
+        }
+      }
+    }
+    return getGetPluginsMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<server.ServerOuterClass.Empty,
+      server.ServerOuterClass.Versions> getGetVersionsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetVersions",
+      requestType = server.ServerOuterClass.Empty.class,
+      responseType = server.ServerOuterClass.Versions.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<server.ServerOuterClass.Empty,
+      server.ServerOuterClass.Versions> getGetVersionsMethod() {
+    io.grpc.MethodDescriptor<server.ServerOuterClass.Empty, server.ServerOuterClass.Versions> getGetVersionsMethod;
+    if ((getGetVersionsMethod = ServerGrpc.getGetVersionsMethod) == null) {
+      synchronized (ServerGrpc.class) {
+        if ((getGetVersionsMethod = ServerGrpc.getGetVersionsMethod) == null) {
+          ServerGrpc.getGetVersionsMethod = getGetVersionsMethod =
+              io.grpc.MethodDescriptor.<server.ServerOuterClass.Empty, server.ServerOuterClass.Versions>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetVersions"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  server.ServerOuterClass.Empty.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  server.ServerOuterClass.Versions.getDefaultInstance()))
+              .setSchemaDescriptor(new ServerMethodDescriptorSupplier("GetVersions"))
+              .build();
+        }
+      }
+    }
+    return getGetVersionsMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -215,6 +277,20 @@ public final class ServerGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListServersMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void getPlugins(server.ServerOuterClass.Empty request,
+        io.grpc.stub.StreamObserver<server.ServerOuterClass.Plugins> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetPluginsMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getVersions(server.ServerOuterClass.Empty request,
+        io.grpc.stub.StreamObserver<server.ServerOuterClass.Versions> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetVersionsMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -245,6 +321,20 @@ public final class ServerGrpc {
                 server.ServerOuterClass.Empty,
                 server.ServerOuterClass.ListServersResponse>(
                   this, METHODID_LIST_SERVERS)))
+          .addMethod(
+            getGetPluginsMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                server.ServerOuterClass.Empty,
+                server.ServerOuterClass.Plugins>(
+                  this, METHODID_GET_PLUGINS)))
+          .addMethod(
+            getGetVersionsMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                server.ServerOuterClass.Empty,
+                server.ServerOuterClass.Versions>(
+                  this, METHODID_GET_VERSIONS)))
           .build();
     }
   }
@@ -294,6 +384,22 @@ public final class ServerGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getListServersMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getPlugins(server.ServerOuterClass.Empty request,
+        io.grpc.stub.StreamObserver<server.ServerOuterClass.Plugins> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetPluginsMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getVersions(server.ServerOuterClass.Empty request,
+        io.grpc.stub.StreamObserver<server.ServerOuterClass.Versions> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetVersionsMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -336,6 +442,20 @@ public final class ServerGrpc {
     public server.ServerOuterClass.ListServersResponse listServers(server.ServerOuterClass.Empty request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getListServersMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public server.ServerOuterClass.Plugins getPlugins(server.ServerOuterClass.Empty request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetPluginsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public server.ServerOuterClass.Versions getVersions(server.ServerOuterClass.Empty request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetVersionsMethod(), getCallOptions(), request);
     }
   }
 
@@ -384,12 +504,30 @@ public final class ServerGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getListServersMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<server.ServerOuterClass.Plugins> getPlugins(
+        server.ServerOuterClass.Empty request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetPluginsMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<server.ServerOuterClass.Versions> getVersions(
+        server.ServerOuterClass.Empty request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetVersionsMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE_SERVER = 0;
   private static final int METHODID_UPDATE_SERVER = 1;
   private static final int METHODID_DELETE_SERVER = 2;
   private static final int METHODID_LIST_SERVERS = 3;
+  private static final int METHODID_GET_PLUGINS = 4;
+  private static final int METHODID_GET_VERSIONS = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -423,6 +561,14 @@ public final class ServerGrpc {
         case METHODID_LIST_SERVERS:
           serviceImpl.listServers((server.ServerOuterClass.Empty) request,
               (io.grpc.stub.StreamObserver<server.ServerOuterClass.ListServersResponse>) responseObserver);
+          break;
+        case METHODID_GET_PLUGINS:
+          serviceImpl.getPlugins((server.ServerOuterClass.Empty) request,
+              (io.grpc.stub.StreamObserver<server.ServerOuterClass.Plugins>) responseObserver);
+          break;
+        case METHODID_GET_VERSIONS:
+          serviceImpl.getVersions((server.ServerOuterClass.Empty) request,
+              (io.grpc.stub.StreamObserver<server.ServerOuterClass.Versions>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -489,6 +635,8 @@ public final class ServerGrpc {
               .addMethod(getUpdateServerMethod())
               .addMethod(getDeleteServerMethod())
               .addMethod(getListServersMethod())
+              .addMethod(getGetPluginsMethod())
+              .addMethod(getGetVersionsMethod())
               .build();
         }
       }
