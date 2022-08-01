@@ -12,14 +12,6 @@ import java.util.Locale;
 public class Events implements Listener {
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent e){
-        if(Bukkit.getOnlinePlayers().size() == 0){
-            LauchMain.plugin.getLogger().info("На сервере 0 игроков, завершаю работу");
-            LauchMain.DeleteServer();
-        }
-    }
-
-    @EventHandler
     public void OnJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
         if(p.getName().toLowerCase(Locale.ROOT).equals(Bukkit.getServerName()) && !p.isOp()){
